@@ -1,0 +1,296 @@
+import 'package:flutter/material.dart';
+
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Row(
+            children: [
+              Icon(Icons.bike_scooter, color: Colors.white, size: 30),
+              SizedBox(width: 8),
+              Text('TERMINALS', style: TextStyle(fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: Colors.white)),
+            ],
+          ),
+          flexibleSpace: FlexibleSpaceBar(
+            background: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFF4286f4), Color(0xFF035594)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+          ),
+          centerTitle: true,
+          elevation: 4,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(1.20),
+              child: SizedBox(
+                width: 90,
+                height: 90,
+                child: Image.asset('assets/lakbay_cavite_logo.png'),
+              ),
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildProfileCard(),
+              const SizedBox(height: 20),
+              _buildPeopleYouKnow(),
+              const SizedBox(height: 20),
+              _buildSavedRoutes(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileCard() {
+    return const Card(
+      child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: NetworkImage(
+                  'https://mhschronicle.com/wp-content/uploads/2022/01/dfm-cover-clean.jpg'), // Replace with actual image URL
+            ),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Juan doe',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    'lorem ipsum, bakit ka may dimsum',
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Icon(Icons.male),
+                SizedBox(height: 8),
+                Icon(Icons.location_on),
+                SizedBox(height: 8),
+                Icon(Icons.add),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPeopleYouKnow() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'People You Know',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+                Text(
+                  'More',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildPersonCard('Bossb',
+                    'https://hasitleaked.com/wp-content/uploads/2024/09/Screenshot-2024-09-13-at-12.24.56-316x320.png'),
+                // Replace with actual image URL
+                _buildPersonCard('rentaro',
+                    'https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36'),
+                // Replace with actual image URL
+                _buildPersonCard('KSI',
+                    'https://billboardphilippines.com/wp-content/uploads/2024/07/keshi-ftr-img.jpg'),
+                // Replace with actual image URL
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPersonCard(String name, String imageUrl) {
+    return Column(
+      children: [
+        CircleAvatar(
+          radius: 30,
+          backgroundImage: NetworkImage(imageUrl),
+        ),
+        const SizedBox(height: 8),
+        Text(name),
+      ],
+    );
+  }
+
+  Widget _buildSavedRoutes() {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'SAVED ROUTES',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Imus --->dasma',
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildRouteItem('assets/tricycle.png', 'P13',
+                    'ETA: 10 :00 AM', 'Imus ---> Dasma'),
+                _buildRouteItem('assets/van.png', 'P14',
+                    'ETA: 10:30 AM', 'Imus ---> Dasma'),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRouteItem(String busImage, String busNumber, String eta,
+      String route) {
+    return Column(
+      children: [
+        Image.asset(busImage),
+        const SizedBox(height: 8),
+        Text(busNumber),
+        const SizedBox(height: 8),
+        Text(eta),
+        const SizedBox(height: 8),
+        Text(route),
+      ],
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        hintStyle: const TextStyle(color: Colors.white54),
+                        prefixIcon: const Icon(Icons.search, color: Colors.white),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.transparent,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      ),
+                    ),
+
+
+
+
+
+
+
+
+child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildIconButton(
+                            icon: Icons.call,
+                            label: 'Hotlines',
+                            iconColor: Colors.redAccent,
+                            textColor: Colors.red,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const HotlinesPage()),
+                              );
+                            },
+                          ),
+                          // Additional buttons can be added here
+                        ],
+                      ),
+                    ),
+
+
+
+
+
+
+
+
+
+ child: const TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                        suffixIcon: Icon(Icons.search, color: Colors.grey),
+                      ),
+                    )

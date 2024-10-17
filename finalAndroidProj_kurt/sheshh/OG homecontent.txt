@@ -1,0 +1,179 @@
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:sheshh/pages/community_page.dart';
+import 'package:sheshh/pages/maps_page.dart';
+import 'package:sheshh/pages/terminals_page.dart';
+
+class HomeContent extends StatelessWidget {
+  const HomeContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Card(
+        elevation: 9,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // First Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Maps Button
+                    _buildRoundedButton(
+                      context: context,
+                      imagePath: 'assets/newcityhall.jpg',
+                      label: 'Maps',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MapPage()),
+                        );
+                      },
+                    ),
+                    // Community Button
+                    _buildRoundedButton(
+                      context: context,
+                      imagePath: 'assets/plaza.jpg',
+                      label: 'Community',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const CommunityPage()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                // Second Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Terminals Button
+                    _buildRoundedButton(
+                      context: context,
+                      imagePath: 'assets/tricyy.jpg',
+                      label: 'Terminals',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const TricycleTerminalsPage()),
+                        );
+                      },
+                    ),
+                    // Hospitals Button
+                    _buildRoundedButton(
+                      context: context,
+                      imagePath: 'assets/ospitals.jpg',
+                      label: 'Hospitals',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MapPage()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                // Third Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Auto-Repair Button
+                    _buildRoundedButton(
+                      context: context,
+                      imagePath: 'assets/carrapide.jpg',
+                      label: 'Auto-Repair',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MapPage()),
+                        );
+                      },
+                    ),
+                    // Gas Station Button
+                    _buildRoundedButton(
+                      context: context,
+                      imagePath: 'assets/gas.jpg',
+                      label: 'Gas Station',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const MapPage()),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Reusable method to create a rounded button with a blurred background
+  Widget _buildRoundedButton({
+    required BuildContext context,
+    required String imagePath,
+    required String label,
+    required VoidCallback onPressed,
+  }) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 3),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(30.0),
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                  height: 200,
+                  width: double.infinity,
+                ),
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.black87,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                minimumSize: const Size(double.infinity, 200),
+              ),
+              onPressed: onPressed,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 8),
+                  Text(
+                    label,
+                    style: const TextStyle(fontSize: 20, fontFamily: 'Poppins'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
